@@ -1,0 +1,33 @@
+﻿<Window x:Class="bibliotech.bookList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bibliotech"
+        mc:Ignorable="d"
+        Title="bookList" Height="450" Width="1100">
+    <Grid>
+        <StackPanel>
+
+            <DataGrid HorizontalAlignment="Right" AutoGenerateColumns="False" x:Name="booklist" Width="900" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding bookName}" Header="Название"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding amountPages}" Header="Страниц"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Format.format1}" Header="Формат"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding publisher}"  Header="Издательство"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Quality.quality1}"  Header="Качество"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding author}"  Header="Автор"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding publicationDate}"  Header="Дата Публикации"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding BookGenre.genre}"  Header="Жанр"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding note}"  Header="Примечания"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Width="150" Height="40" x:Name="deleteBook" Content="Удалить книгу" HorizontalAlignment="Left" Margin="10 10" Click="deleteBook_Click"></Button>
+            <Button Width="150" Height="40" x:Name="addBook" Content="Добавить книгу" HorizontalAlignment="Left" Margin="10 10" Click="addBook_Click"></Button>
+        </StackPanel>
+        
+        
+        
+    </Grid>
+</Window>

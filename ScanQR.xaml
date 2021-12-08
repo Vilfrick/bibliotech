@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="bibliotech.ScanQR"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:bibliotech"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="500">
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="10" HorizontalAlignment="Center" Text="Просканируйте QR"  FontSize="29" FontFamily="Mistral" Foreground="#BF1A33"></TextBlock>
+            <Image Margin="10" Width="150" Height="150" x:Name="ingQR"></Image>
+            <TextBox x:Name="textQR" Margin="10" FontSize="16" materialDesign:HintAssist.Hint="Текст"></TextBox>
+            <Button x:Name="buttonScanQR" Click="buttonScanQR_Click" Margin="10" HorizontalAlignment="Center" Background="#BF1A33" BorderBrush="#BF1A33" materialDesign:ButtonAssist.CornerRadius="25">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Qrcode" Margin="0 0 5 0" Width="25" Height="25"></materialDesign:PackIcon>
+                        <TextBlock FontSize="16" Text="Просканируйте QR" ></TextBlock>
+                    </StackPanel>
+                </Button>
+
+               
+         
+
+        </StackPanel>
+    </Grid>
+</UserControl>

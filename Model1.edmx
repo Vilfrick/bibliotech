@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BiblioTechModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Access">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Act">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="finaldate" Type="date" />
+          <Property Name="actStatus_id" Type="int" />
+          <Property Name="book_id" Type="int" />
+          <Property Name="visitor_id" Type="int" />
+        </EntityType>
+        <EntityType Name="ActStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="actStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BookGenre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="genre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BookList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookName" Type="nvarchar" MaxLength="100" />
+          <Property Name="amountPages" Type="int" />
+          <Property Name="format_id" Type="int" />
+          <Property Name="publisher" Type="nvarchar" MaxLength="120" />
+          <Property Name="quality_id" Type="int" />
+          <Property Name="author" Type="nvarchar" MaxLength="150" />
+          <Property Name="publicationDate" Type="date" />
+          <Property Name="bookGenre_id" Type="int" />
+          <Property Name="note" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DocumentList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="documentName" Type="nvarchar" MaxLength="150" />
+          <Property Name="documentType_id" Type="int" />
+          <Property Name="note" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="documentType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="format" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Quality">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="quality" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VisitorList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="foto" Type="image" />
+          <Property Name="qr" Type="image" />
+          <Property Name="status_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Act_ActStatus">
+          <End Role="ActStatus" Type="Self.ActStatus" Multiplicity="0..1" />
+          <End Role="Act" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Act">
+              <PropertyRef Name="actStatus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Act_BookList">
+          <End Role="BookList" Type="Self.BookList" Multiplicity="0..1" />
+          <End Role="Act" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Act">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Act_VisitorList">
+          <End Role="VisitorList" Type="Self.VisitorList" Multiplicity="0..1" />
+          <End Role="Act" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitorList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Act">
+              <PropertyRef Name="visitor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookList_BookGenre">
+          <End Role="BookGenre" Type="Self.BookGenre" Multiplicity="0..1" />
+          <End Role="BookList" Type="Self.BookList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookGenre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookList">
+              <PropertyRef Name="bookGenre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookList_Format">
+          <End Role="Format" Type="Self.Format" Multiplicity="0..1" />
+          <End Role="BookList" Type="Self.BookList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookList">
+              <PropertyRef Name="format_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookList_Quality">
+          <End Role="Quality" Type="Self.Quality" Multiplicity="0..1" />
+          <End Role="BookList" Type="Self.BookList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quality">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookList">
+              <PropertyRef Name="quality_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentList_DocumentType">
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="0..1" />
+          <End Role="DocumentList" Type="Self.DocumentList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentList">
+              <PropertyRef Name="documentType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitorList_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="VisitorList" Type="Self.VisitorList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VisitorList">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BiblioTechModelContainer">
+          <EntitySet Name="Access" EntityType="Self.Access" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Act" EntityType="Self.Act" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActStatus" EntityType="Self.ActStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookGenre" EntityType="Self.BookGenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookList" EntityType="Self.BookList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentList" EntityType="Self.DocumentList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentType" EntityType="Self.DocumentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Format" EntityType="Self.Format" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quality" EntityType="Self.Quality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitorList" EntityType="Self.VisitorList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Act_ActStatus" Association="Self.FK_Act_ActStatus">
+            <End Role="ActStatus" EntitySet="ActStatus" />
+            <End Role="Act" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Act_BookList" Association="Self.FK_Act_BookList">
+            <End Role="BookList" EntitySet="BookList" />
+            <End Role="Act" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Act_VisitorList" Association="Self.FK_Act_VisitorList">
+            <End Role="VisitorList" EntitySet="VisitorList" />
+            <End Role="Act" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookList_BookGenre" Association="Self.FK_BookList_BookGenre">
+            <End Role="BookGenre" EntitySet="BookGenre" />
+            <End Role="BookList" EntitySet="BookList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookList_Format" Association="Self.FK_BookList_Format">
+            <End Role="Format" EntitySet="Format" />
+            <End Role="BookList" EntitySet="BookList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookList_Quality" Association="Self.FK_BookList_Quality">
+            <End Role="Quality" EntitySet="Quality" />
+            <End Role="BookList" EntitySet="BookList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentList_DocumentType" Association="Self.FK_DocumentList_DocumentType">
+            <End Role="DocumentType" EntitySet="DocumentType" />
+            <End Role="DocumentList" EntitySet="DocumentList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitorList_Status" Association="Self.FK_VisitorList_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="VisitorList" EntitySet="VisitorList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BiblioTechModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Access">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Act">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="finaldate" Type="DateTime" Precision="0" />
+          <Property Name="actStatus_id" Type="Int32" />
+          <Property Name="book_id" Type="Int32" />
+          <Property Name="visitor_id" Type="Int32" />
+          <NavigationProperty Name="ActStatus" Relationship="Self.FK_Act_ActStatus" FromRole="Act" ToRole="ActStatus" />
+          <NavigationProperty Name="BookList" Relationship="Self.FK_Act_BookList" FromRole="Act" ToRole="BookList" />
+          <NavigationProperty Name="VisitorList" Relationship="Self.FK_Act_VisitorList" FromRole="Act" ToRole="VisitorList" />
+        </EntityType>
+        <EntityType Name="ActStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="actStatus1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Act" Relationship="Self.FK_Act_ActStatus" FromRole="ActStatus" ToRole="Act" />
+        </EntityType>
+        <EntityType Name="BookGenre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookList" Relationship="Self.FK_BookList_BookGenre" FromRole="BookGenre" ToRole="BookList" />
+        </EntityType>
+        <EntityType Name="BookList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="amountPages" Type="Int32" />
+          <Property Name="format_id" Type="Int32" />
+          <Property Name="publisher" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="quality_id" Type="Int32" />
+          <Property Name="author" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="publicationDate" Type="DateTime" Precision="0" />
+          <Property Name="bookGenre_id" Type="Int32" />
+          <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Act" Relationship="Self.FK_Act_BookList" FromRole="BookList" ToRole="Act" />
+          <NavigationProperty Name="BookGenre" Relationship="Self.FK_BookList_BookGenre" FromRole="BookList" ToRole="BookGenre" />
+          <NavigationProperty Name="Format" Relationship="Self.FK_BookList_Format" FromRole="BookList" ToRole="Format" />
+          <NavigationProperty Name="Quality" Relationship="Self.FK_BookList_Quality" FromRole="BookList" ToRole="Quality" />
+        </EntityType>
+        <EntityType Name="DocumentList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="documentName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="documentType_id" Type="Int32" />
+          <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DocumentType" Relationship="Self.FK_DocumentList_DocumentType" FromRole="DocumentList" ToRole="DocumentType" />
+        </EntityType>
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="documentType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DocumentList" Relationship="Self.FK_DocumentList_DocumentType" FromRole="DocumentType" ToRole="DocumentList" />
+        </EntityType>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="format1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookList" Relationship="Self.FK_BookList_Format" FromRole="Format" ToRole="BookList" />
+        </EntityType>
+        <EntityType Name="Quality">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="quality1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookList" Relationship="Self.FK_BookList_Quality" FromRole="Quality" ToRole="BookList" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="status1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VisitorList" Relationship="Self.FK_VisitorList_Status" FromRole="Status" ToRole="VisitorList" />
+        </EntityType>
+        <EntityType Name="VisitorList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="qr" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="status_id" Type="Int32" />
+          <NavigationProperty Name="Act" Relationship="Self.FK_Act_VisitorList" FromRole="VisitorList" ToRole="Act" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_VisitorList_Status" FromRole="VisitorList" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK_Act_ActStatus">
+          <End Role="ActStatus" Type="Self.ActStatus" Multiplicity="0..1" />
+          <End Role="Act" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Act">
+              <PropertyRef Name="actStatus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Act_BookList">
+          <End Role="BookList" Type="Self.BookList" Multiplicity="0..1" />
+          <End Role="Act" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Act">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Act_VisitorList">
+          <End Role="VisitorList" Type="Self.VisitorList" Multiplicity="0..1" />
+          <End Role="Act" Type="Self.Act" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitorList">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Act">
+              <PropertyRef Name="visitor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookList_BookGenre">
+          <End Role="BookGenre" Type="Self.BookGenre" Multiplicity="0..1" />
+          <End Role="BookList" Type="Self.BookList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookGenre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookList">
+              <PropertyRef Name="bookGenre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookList_Format">
+          <End Role="Format" Type="Self.Format" Multiplicity="0..1" />
+          <End Role="BookList" Type="Self.BookList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookList">
+              <PropertyRef Name="format_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookList_Quality">
+          <End Role="Quality" Type="Self.Quality" Multiplicity="0..1" />
+          <End Role="BookList" Type="Self.BookList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quality">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookList">
+              <PropertyRef Name="quality_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentList_DocumentType">
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="0..1" />
+          <End Role="DocumentList" Type="Self.DocumentList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentList">
+              <PropertyRef Name="documentType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitorList_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="VisitorList" Type="Self.VisitorList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VisitorList">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BiblioTechEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Access" EntityType="Self.Access" />
+          <EntitySet Name="Act" EntityType="Self.Act" />
+          <EntitySet Name="ActStatus" EntityType="Self.ActStatus" />
+          <EntitySet Name="BookGenre" EntityType="Self.BookGenre" />
+          <EntitySet Name="BookList" EntityType="Self.BookList" />
+          <EntitySet Name="DocumentList" EntityType="Self.DocumentList" />
+          <EntitySet Name="DocumentType" EntityType="Self.DocumentType" />
+          <EntitySet Name="Format" EntityType="Self.Format" />
+          <EntitySet Name="Quality" EntityType="Self.Quality" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="VisitorList" EntityType="Self.VisitorList" />
+          <AssociationSet Name="FK_Act_ActStatus" Association="Self.FK_Act_ActStatus">
+            <End Role="ActStatus" EntitySet="ActStatus" />
+            <End Role="Act" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Act_BookList" Association="Self.FK_Act_BookList">
+            <End Role="BookList" EntitySet="BookList" />
+            <End Role="Act" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Act_VisitorList" Association="Self.FK_Act_VisitorList">
+            <End Role="VisitorList" EntitySet="VisitorList" />
+            <End Role="Act" EntitySet="Act" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookList_BookGenre" Association="Self.FK_BookList_BookGenre">
+            <End Role="BookGenre" EntitySet="BookGenre" />
+            <End Role="BookList" EntitySet="BookList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookList_Format" Association="Self.FK_BookList_Format">
+            <End Role="Format" EntitySet="Format" />
+            <End Role="BookList" EntitySet="BookList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookList_Quality" Association="Self.FK_BookList_Quality">
+            <End Role="Quality" EntitySet="Quality" />
+            <End Role="BookList" EntitySet="BookList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentList_DocumentType" Association="Self.FK_DocumentList_DocumentType">
+            <End Role="DocumentType" EntitySet="DocumentType" />
+            <End Role="DocumentList" EntitySet="DocumentList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitorList_Status" Association="Self.FK_VisitorList_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="VisitorList" EntitySet="VisitorList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BiblioTechModelContainer" CdmEntityContainer="BiblioTechEntities">
+          <EntitySetMapping Name="Access">
+            <EntityTypeMapping TypeName="BiblioTechModel.Access">
+              <MappingFragment StoreEntitySet="Access">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Act">
+            <EntityTypeMapping TypeName="BiblioTechModel.Act">
+              <MappingFragment StoreEntitySet="Act">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="finaldate" ColumnName="finaldate" />
+                <ScalarProperty Name="actStatus_id" ColumnName="actStatus_id" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="visitor_id" ColumnName="visitor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActStatus">
+            <EntityTypeMapping TypeName="BiblioTechModel.ActStatus">
+              <MappingFragment StoreEntitySet="ActStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="actStatus1" ColumnName="actStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookGenre">
+            <EntityTypeMapping TypeName="BiblioTechModel.BookGenre">
+              <MappingFragment StoreEntitySet="BookGenre">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookList">
+            <EntityTypeMapping TypeName="BiblioTechModel.BookList">
+              <MappingFragment StoreEntitySet="BookList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bookName" ColumnName="bookName" />
+                <ScalarProperty Name="amountPages" ColumnName="amountPages" />
+                <ScalarProperty Name="format_id" ColumnName="format_id" />
+                <ScalarProperty Name="publisher" ColumnName="publisher" />
+                <ScalarProperty Name="quality_id" ColumnName="quality_id" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="publicationDate" ColumnName="publicationDate" />
+                <ScalarProperty Name="bookGenre_id" ColumnName="bookGenre_id" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentList">
+            <EntityTypeMapping TypeName="BiblioTechModel.DocumentList">
+              <MappingFragment StoreEntitySet="DocumentList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="documentName" ColumnName="documentName" />
+                <ScalarProperty Name="documentType_id" ColumnName="documentType_id" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentType">
+            <EntityTypeMapping TypeName="BiblioTechModel.DocumentType">
+              <MappingFragment StoreEntitySet="DocumentType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="documentType1" ColumnName="documentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Format">
+            <EntityTypeMapping TypeName="BiblioTechModel.Format">
+              <MappingFragment StoreEntitySet="Format">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="format1" ColumnName="format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quality">
+            <EntityTypeMapping TypeName="BiblioTechModel.Quality">
+              <MappingFragment StoreEntitySet="Quality">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quality1" ColumnName="quality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="BiblioTechModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status1" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitorList">
+            <EntityTypeMapping TypeName="BiblioTechModel.VisitorList">
+              <MappingFragment StoreEntitySet="VisitorList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="qr" ColumnName="qr" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

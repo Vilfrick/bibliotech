@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea2d0f9717e54460b3b4966347c27a18" Name="Diagram1">
+        <EntityTypeShape EntityType="BiblioTechModel.Access" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.Act" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.ActStatus" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.BookGenre" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.BookList" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.DocumentList" Width="1.5" PointX="8.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.DocumentType" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.Format" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.Quality" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.Status" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiblioTechModel.VisitorList" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="BiblioTechModel.FK_Act_ActStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_Act_BookList" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_Act_VisitorList" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_BookList_BookGenre" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_BookList_Format" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_BookList_Quality" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_DocumentList_DocumentType" ManuallyRouted="false" />
+        <AssociationConnector Association="BiblioTechModel.FK_VisitorList_Status" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
